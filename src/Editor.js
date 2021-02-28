@@ -1,27 +1,30 @@
 import React from 'react';
 import MonacoEditor from "react-monaco-editor/lib/editor";
 import {validate} from "./Validator";
+import sampleSwagger from "./SampleSwagger";
 
 class Editor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      code: '{ \n"foo": \n"bar" \n}',
+      code: sampleSwagger,
     }
   }
 
   editorDidMount(editor, monaco) {
+    // noinspection JSUnusedLocalSymbols
     this.setState((state) => {
       return {
         editor,
         monaco,
       };
     });
+    this.doValidation(this.state.code);
     editor.focus();
   }
 
 
-  /*
+  /*  this is a sample validation result:
   {
   "range": {
     "start": {
@@ -39,28 +42,28 @@ class Editor extends React.Component {
   "path": []
 }
    */
-  onChange(newValue, e) {
-    validate(newValue, validationResults => {
+  doValidation(value) {
+    validate(value, validationResults => {
       const markers = validationResults.map(r => ({
         startLineNumber: r.range.start.line + 1,
         endLineNumber: r.range.end.line + 1,
         startColumn: r.range.start.character + 1,
         endColumn: r.range.end.character + 1,
         message: r.message,
+
+        // TODO: map from r.severity
         severity: this.state.monaco.MarkerSeverity.Error,
+
+        // TODO: map r.code to something.
       }));
 
       this.state.monaco.editor.setModelMarkers(this.state.editor.getModel(), 'jshint', markers);
     });
-    // TODO: have the validator set markers.
-    //this.state.monaco.editor.setModelMarkers(this.state.editor.getModel(), 'jshint', [{
-    //  startLineNumber: 2,
-    //  endLineNumber: 2,
-    //  startColumn: 2,
-    //  endColumn: 6,
-    //  message: 'hello world',
-    //  severity: this.state.monaco.MarkerSeverity.Error,
-    //}]);
+  }
+
+  // noinspection JSUnusedLocalSymbols
+  onChange(newValue, e) {
+    this.doValidation(newValue);
   }
 
   render() {
