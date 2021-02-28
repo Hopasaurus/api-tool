@@ -1,0 +1,11 @@
+--- package.json	2021-02-28 07:36:38.881272264 -0500
++++ package.json.fixed	2021-02-28 07:48:59.009285088 -0500
+@@ -68,7 +68,7 @@
+     "iteration"
+   ],
+   "license": "MIT",
+-  "main": "./src/index.cjs",
++  "main": "./src/index.mjs",
+   "name": "@stoplight/ordered-object-literal",
+   "repository": {
+     "type": "git",
