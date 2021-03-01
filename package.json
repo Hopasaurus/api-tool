@@ -12,6 +12,7 @@
     "react-dom": "^17.0.1",
     "react-monaco-editor": "^0.42.0",
     "react-scripts": "4.0.3",
+    "swagger-ui-react": "^3.44.0",
     "web-vitals": "^1.1.0",
     "yaml": "^1.10.0",
     "yaml-source-map": "^2.1.1"

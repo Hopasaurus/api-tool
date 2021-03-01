@@ -1,14 +1,14 @@
 import React from 'react';
 import MonacoEditor from "react-monaco-editor/lib/editor";
-import {validate} from "./Validator";
-import sampleSwagger from "./SampleSwagger";
+import Validator from "./Validator";
 
 class Editor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      code: sampleSwagger,
+      spec: props.initialValue,
     }
+    this.validator = new Validator();
   }
 
   editorDidMount(editor, monaco) {
@@ -19,7 +19,8 @@ class Editor extends React.Component {
         monaco,
       };
     });
-    this.doValidation(this.state.code);
+    this.doValidation(this.state.spec);
+    this.props.onChange(this.state.spec);
     editor.focus();
   }
 
@@ -43,7 +44,10 @@ class Editor extends React.Component {
 }
    */
   doValidation(value) {
-    validate(value, validationResults => {
+    if(!value) {
+      return;
+    }
+    this.validator.validate(value, validationResults => {
       const markers = validationResults.map(r => ({
         startLineNumber: r.range.start.line + 1,
         endLineNumber: r.range.end.line + 1,
@@ -63,11 +67,18 @@ class Editor extends React.Component {
 
   // noinspection JSUnusedLocalSymbols
   onChange(newValue, e) {
+    this.setState((state) => {
+      return {
+        spec: newValue,
+      };
+    });
+
+    this.props.onChange(newValue);
     this.doValidation(newValue);
   }
 
   render() {
-    const code = this.state.code;
+    const code = this.state.spec;
     const options = {
       selectOnLineNumbers: true,
     };

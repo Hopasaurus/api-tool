@@ -6,6 +6,7 @@
 .App {
   /*text-align: center;*/
   height: 99%;
+  overflow: hidden;
 }
 
 .App-logo {
@@ -44,11 +45,12 @@
   flex-grow: 2;
   background-color: aliceblue;
   margin: 2px;
-  height: 100%;
+  height: 99%;
 }
 .swagger-ui {
   flex-grow: 3;
   background-color: aliceblue;
   margin: 2px;
-  height: 100%;
+  height: 99%;
+  overflow: auto;
 }
