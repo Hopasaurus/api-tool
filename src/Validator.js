@@ -12,6 +12,11 @@ export default class Validator {
   }
 
   validate(input, done) {
+    if (!this.initialized) {
+      console.log('waiting for spectral initialization...');
+      setTimeout(() => this.validate(input, done), 100);
+    }
+
     // this debouncing could be replaced with rxjs
     // also if doing that, reset the time out each time to make typing smoother
     this.input = input;
@@ -21,10 +26,6 @@ export default class Validator {
     }
     this.pending = true;
 
-    if (!this.initialized) {
-      console.log('waiting for spectral initialization...');
-      setTimeout(() => this.validate(input, done), 100);
-    }
 
     console.dir('validation queued');
 
