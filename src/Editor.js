@@ -56,13 +56,29 @@ class Editor extends React.Component {
         message: r.message,
 
         // TODO: map from r.severity
-        severity: this.state.monaco.MarkerSeverity.Error,
+        //severity: this.state.monaco.MarkerSeverity.Error,
+        severity: this.mapSeverity(r.severity),
 
         // TODO: map r.code to something.
       }));
 
       this.state.monaco.editor.setModelMarkers(this.state.editor.getModel(), 'jshint', markers);
     });
+  }
+
+  mapSeverity(input) {
+    const sevMap = {
+      0: this.state.monaco.MarkerSeverity.Error,
+      1: this.state.monaco.MarkerSeverity.Warning,
+      2: this.state.monaco.MarkerSeverity.Info,
+      3: this.state.monaco.MarkerSeverity.Hint,
+    }
+
+    if(sevMap.hasOwnProperty(input)) {
+      return sevMap[input];
+    }
+
+    return this.state.monaco.MarkerSeverity.Error;
   }
 
   // noinspection JSUnusedLocalSymbols
@@ -84,7 +100,7 @@ class Editor extends React.Component {
     };
     return (
       <MonacoEditor
-        width="600px"
+        width="1200px"
         height="100%"
         language="json"
         theme="vs-dark"

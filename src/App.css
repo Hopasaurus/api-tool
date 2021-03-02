@@ -42,13 +42,13 @@
 }
 
 .editor {
-  flex-grow: 2;
+  flex-grow: 5;
   background-color: aliceblue;
   margin: 2px;
   height: 99%;
 }
 .swagger-ui {
-  flex-grow: 3;
+  flex-grow: 1;
   background-color: aliceblue;
   margin: 2px;
   height: 99%;

@@ -73,6 +73,12 @@ const sampleSwagger = `{
         "responses": {
           "405": {
             "description": "Invalid input"
+          },
+          "409": {
+            "description": "Invalid input"
+          },
+          "418": {
+            "description": "Invalid input"
           }
         },
         "security": [
