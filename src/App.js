@@ -28,6 +28,7 @@ class App extends React.Component {
             <Editor onChange={this.onChange.bind(this)} initialValue={sampleSwagger} />
           </div>
           <div className="swagger-ui">
+            <SwaggerUI spec={this.state.spec} />
           </div>
         </div>
       </div>
