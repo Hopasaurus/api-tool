@@ -12,7 +12,9 @@ const sampleSwagger = `{
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    }
+    },
+    "x-tag-info-x": "foobar remove the -x to fix",
+    "x-tag-path": "foobar"
   },
   "host": "petstore.swagger.io",
   "basePath": "/v2",
@@ -88,7 +90,9 @@ const sampleSwagger = `{
               "read:pets"
             ]
           }
-        ]
+        ],
+        "x-tag-info": "foobar",
+        "x-tag-path-x": "foobar remove -x to fix"
       },
       "put": {
         "tags": [
@@ -134,7 +138,9 @@ const sampleSwagger = `{
               "read:pets"
             ]
           }
-        ]
+        ],
+        "x-tag-info": "foobar",
+        "x-tag-path": "foobar"
       }
     },
     "/pet/findByStatus": {
@@ -189,7 +195,9 @@ const sampleSwagger = `{
               "read:pets"
             ]
           }
-        ]
+        ],
+        "x-tag-info": "foobar",
+        "x-tag-path": "foobar"
       }
     },
     "/pet/findByTags": {
@@ -282,7 +290,9 @@ const sampleSwagger = `{
           {
             "api_key": []
           }
-        ]
+        ],
+        "x-tag-info": "foobar",
+        "x-tag-path": "foobar"
       },
       "post": {
         "tags": [

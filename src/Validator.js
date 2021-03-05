@@ -1,5 +1,7 @@
 import {isOpenApiv2, Spectral} from '@stoplight/spectral';
 
+
+// these desperately need to move to an external file:
 const rules = {
   functions: {},
   exceptions: {},
@@ -27,7 +29,7 @@ const rules = {
       }
     },
     'short-and-stout': {
-      message: "I'm a little teapot",  // look for the rest
+      message: "I'm a little teapot, short and stout",  // look for the rest
       given: "$..post.responses",
       severity: "info",
       then: {
@@ -36,6 +38,42 @@ const rules = {
         functionOptions: {
           notMatch: '^418$'
         }
+      }
+    },
+    'no-x-tag-path-in-info': {
+      message: "x.y.z - x-tag must NOT be in $.info",
+      given: "$.info",
+      severity: "error",
+      then: {
+        field: "x-tag-path",
+        function: "falsy"
+      }
+    },
+    'x-tag-info-must-be-in-info': {
+      message: "x.y.z - x-tag-into must be in $.info",
+      given: "$.info",
+      severity: "error",
+      then: {
+        field: "x-tag-info",
+        function: "truthy"
+      }
+    },
+    'x-tag-path-in-each-path': {
+      message: "x.y.z - x-tag-path must be in endpoints",
+      given: "$..[delete,get,patch,post,put]",
+      severity: "error",
+      then: {
+        field: "x-tag-path",
+        function: "truthy"
+      }
+    },
+    'x-tag-info-must-not-be-in-path': {
+      message: "x.y.z - x-tag-info must NOT be in endpoints",
+      given: "$..[delete,get,patch,post,put]",
+      severity: "error",
+      then: {
+        field: "x-tag-info",
+        function: "falsy"
       }
     },
   }
