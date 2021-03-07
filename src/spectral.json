@@ -15,7 +15,7 @@
     "post-return-code": {
       "description": "{{path}} return code is not allowed for POST",
       "message": "{{path}} Return code for POST must be one of: 200, 201, 400, 401, 404",
-      "given": "$..post.responses",
+      "given": "$..[get,post].responses",
       "severity": "error",
       "then": {
         "field": "@key",
@@ -29,7 +29,7 @@
     },
     "short-and-stout": {
       "message": "I'm a little teapot, short and stout",
-      "given": "$..post.responses",
+      "given": "$..[get,post].responses",
       "severity": "info",
       "then": {
         "field": "@key",
